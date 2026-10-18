@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Integrity — Get Started</title>
+<meta name="description" content="Tell us about you and your trade business so we can build your content plan.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&display=swap">
+<style>
+/* Layout: one question group per screen, like a job sheet. A site-sign header band, a progress rule, big tap targets. */
+:root {
+  --bg: #f3f2ef;          /* concrete */
+  --panel: #ffffff;
+  --ink: #1d1f1e;
+  --muted: #5d625f;
+  --line: #d6d5cf;
+  --accent: #e8591a;      /* safety orange */
+  --accent-ink: #ffffff;
+  --accent-soft: #fbe3d6;
+  --band: #1d1f1e;
+  --band-ink: #f3f2ef;
+  --error: #b42318;
+  --display: "Barlow Condensed", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+  --body: "Barlow", "Helvetica Neue", Arial, sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #161817; --panel: #202322; --ink: #eceae4; --muted: #a3a8a4; --line: #3a3e3c;
+    --accent: #ff7a3d; --accent-ink: #1a0d06; --accent-soft: #3d2416;
+    --band: #0e0f0f; --band-ink: #eceae4; --error: #ff8a7a;
+    color-scheme: dark;
+  }
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html, body { margin: 0; }
+body {
+  background: var(--bg); color: var(--ink);
+  font: 400 17px/1.5 var(--body);
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh; display: flex; flex-direction: column;
+}
+.wrap {
+  width: 100%; max-width: 640px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+header.band { background: var(--band); color: var(--band-ink); padding-top: env(safe-area-inset-top, 0px); }
+header.band .wrap { padding-block: 14px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.brand { font: 700 22px/1 var(--display); letter-spacing: .14em; text-transform: uppercase; }
+.brand span { color: var(--accent); }
+.stepcount { font: 600 14px/1 var(--display); letter-spacing: .08em; text-transform: uppercase; opacity: .8; font-variant-numeric: tabular-nums; }
+.progress { height: 6px; background: color-mix(in srgb, var(--band-ink) 18%, transparent); }
+.progress i { display: block; height: 100%; width: 0; background: var(--accent); transition: width .3s ease; }
+
+main { flex: 1; }
+main .wrap { padding-block: 28px 120px; display: grid; gap: 22px; }
+.eyebrow { font: 600 14px/1 var(--display); letter-spacing: .12em; text-transform: uppercase; color: var(--accent); }
+h1, h2 { font-family: var(--display); font-weight: 700; line-height: 1.05; margin: 0; text-wrap: balance; }
+h1 { font-size: clamp(38px, 9vw, 54px); text-transform: uppercase; letter-spacing: .01em; }
+h2 { font-size: clamp(30px, 7vw, 40px); text-transform: uppercase; }
+.lede { margin: 0; color: var(--muted); max-width: 52ch; }
+.facts { display: flex; flex-wrap: wrap; gap: 8px 18px; margin: 0; padding: 0; list-style: none; color: var(--muted); font-size: 15px; }
+.facts li::before { content: "— "; color: var(--accent); }
+
+.q { display: grid; gap: 8px; }
+.q > label, .q > .qlabel { font-weight: 600; font-size: 17px; }
+.req { color: var(--accent); margin-left: 2px; }
+.hint { color: var(--muted); font-size: 15px; margin-top: -4px; }
+input[type=text], input[type=tel], input[type=email], select, textarea {
+  width: 100%; font: inherit; color: var(--ink); background: var(--panel);
+  border: 2px solid var(--line); border-radius: 6px; padding: 12px 14px; min-height: 52px;
+}
+textarea { min-height: 104px; resize: vertical; }
+input:focus, select:focus, textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+.q.invalid input, .q.invalid select, .q.invalid textarea { border-color: var(--error); }
+.err { color: var(--error); font-size: 15px; font-weight: 500; }
+
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { position: relative; }
+.chip input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.chip span {
+  display: inline-flex; align-items: center; min-height: 46px; padding: 10px 16px;
+  background: var(--panel); border: 2px solid var(--line); border-radius: 999px; font-weight: 500; cursor: pointer;
+}
+.chip input:checked + span { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.chip input:focus-visible + span { box-shadow: 0 0 0 3px var(--accent-soft); border-color: var(--accent); }
+.scale { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; }
+.scale .chip span { width: 100%; justify-content: center; border-radius: 6px; font: 700 20px/1 var(--display); }
+.scale-ends { display: flex; justify-content: space-between; color: var(--muted); font-size: 14px; }
+.consent { display: flex; gap: 12px; align-items: flex-start; background: var(--panel); border: 2px solid var(--line); border-radius: 6px; padding: 14px; }
+.consent input { width: 24px; height: 24px; accent-color: var(--accent); flex: none; margin-top: 2px; }
+
+footer.bar {
+  position: fixed; left: 0; right: 0; bottom: 0; background: var(--panel); border-top: 1px solid var(--line);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+footer.bar .wrap { padding-block: 12px; display: flex; gap: 10px; }
+button { font: 700 19px/1 var(--display); letter-spacing: .08em; text-transform: uppercase; border-radius: 6px; min-height: 54px; padding: 0 20px; cursor: pointer; border: 2px solid transparent; }
+.primary { flex: 1; background: var(--accent); color: var(--accent-ink); }
+.primary:disabled { opacity: .6; cursor: progress; }
+.ghost { background: transparent; color: var(--ink); border-color: var(--line); }
+button:focus-visible { outline: 3px solid var(--accent-soft); outline-offset: 2px; }
+
+.review { display: grid; gap: 18px; }
+.review section { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 16px; display: grid; gap: 10px; }
+.review h3 { margin: 0; font: 700 20px/1.1 var(--display); text-transform: uppercase; display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.review h3 button { min-height: 36px; padding: 0 12px; font-size: 15px; }
+.review dl { margin: 0; display: grid; gap: 8px; }
+.review dt { color: var(--muted); font-size: 14px; }
+.review dd { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; }
+.notice { background: var(--accent-soft); border-radius: 6px; padding: 14px 16px; }
+.saved { color: var(--muted); font-size: 14px; }
+@media (prefers-reduced-motion: reduce) { .progress i { transition: none; } }
+</style>
+</head>
+<body>
+<header class="band">
+  <div class="wrap"><div class="brand">Integ<span>r</span>ity</div><div class="stepcount" id="stepcount">Get started</div></div>
+  <div class="progress" aria-hidden="true"><i id="bar"></i></div>
+</header>
+<main><div class="wrap" id="screen" aria-live="polite"></div></main>
+<footer class="bar"><div class="wrap" id="nav"></div></footer>
+
+<script>
+// Submissions go to Liam's inbox through FormSubmit (formsubmit.co). The first one sends a
+// confirmation email that must be clicked once before submissions are delivered.
+const SUBMIT_URL = "https://formsubmit.co/ajax/liamtup@gmail.com";
+const DRAFT_KEY = "integrity-intake-draft-v1";
+// Open the page with #preview to test: Submit then shows the answers without sending anything.
+const PREVIEW = location.hash === "#preview";
+
+const TRADES = ["Plumbing","Electrical","Carpentry / Building","Landscaping / Gardening","Fencing","Flooring","Painting","Roofing","Concreting","Tiling","Air conditioning / Refrigeration","Pest control","Other"];
+
+const STEPS = [
+  { title: "You and your business", intro: "The facts every post gets built on.", q: [
+    { id: "name", label: "Your name", req: true, auto: "name" },
+    { id: "business", label: "Business name", req: true, auto: "organization" },
+    { id: "trade", label: "Your trade", type: "select", opts: TRADES, req: true },
+    { id: "trade_other", label: "What trade?", showIf: ["trade", "Other"] },
+    { id: "phone", label: "Best phone number", type: "tel", req: true, auto: "tel" },
+    { id: "email", label: "Best email", type: "email", req: true, auto: "email" },
+    { id: "experience", label: "How long in the trade, and how long running your own business?", hint: "e.g. 12 years on the tools, 4 running my own" },
+    { id: "team", label: "How big is the team?", type: "radio", opts: ["Just me","2–5","6–15","15+"] },
+    { id: "based", label: "Where are you based?", hint: "Suburb is fine.", req: true },
+    { id: "areas", label: "What areas do you service?", hint: "The suburbs or regions you actually want work in.", type: "textarea", req: true },
+    { id: "services", label: "What services do you offer?", hint: "Roughly in order of how much you do them.", type: "textarea", req: true },
+    { id: "more_of", label: "What jobs do you want MORE of?", hint: "Your favourite or best-paying work. This is what the content will chase.", type: "textarea", req: true },
+    { id: "avoid", label: "What jobs DON'T you want?", hint: "So we never attract them by accident.", type: "textarea" },
+    { id: "trust", label: "Licences, insurance, certifications or awards", hint: "e.g. QBCC licence, fully insured, police-checked. These build trust fast.", type: "textarea" },
+    { id: "hours", label: "Days and hours you work" },
+    { id: "website", label: "Website, if you have one", type: "text", auto: "url" },
+  ]},
+  { title: "Where you are online now", intro: "Leave blank anything you don't have.", q: [
+    { id: "instagram", label: "Instagram handle(s)", hint: "Business and personal, if you have both." },
+    { id: "facebook", label: "Facebook page link or name" },
+    { id: "tiktok", label: "TikTok handle" },
+    { id: "gbp", label: "Do you show up on Google Maps (a Google Business Profile)?", type: "radio", opts: ["Yes","No","Not sure"] },
+    { id: "reviews", label: "Roughly how many Google reviews do you have?" },
+    { id: "lead_sources", label: "Where do most of your jobs come from right now?", type: "checks", opts: ["Word of mouth","Repeat customers","Google search / Maps","Facebook or local groups","Instagram","hipages / ServiceSeeking / Airtasker","Builders or property managers","Signage on the ute"] },
+    { id: "tried", label: "What have you tried with social media or marketing before, and how did it go?", hint: "Knowing what didn't work is just as useful.", type: "textarea" },
+  ]},
+  { title: "Your customers", intro: "Who the content is for.", q: [
+    { id: "customer_types", label: "Who do you mostly work for?", type: "checks", opts: ["Homeowners","Landlords / property managers","Builders / other trades","Commercial","Strata / body corporate","Government / councils"] },
+    { id: "ideal_customer", label: "Describe your ideal customer", hint: "e.g. busy families in Buderim who just want it sorted.", type: "textarea", req: true },
+    { id: "happy_says", label: "What do happy customers say about you?", hint: "Paste a favourite review or message if you've got one.", type: "textarea" },
+    { id: "worries", label: "What do people ask or worry about before booking?", hint: "Price, timing, mess, whether you'll show up. These become content ideas.", type: "textarea" },
+    { id: "price", label: "Where do you sit on price?", type: "radio", opts: ["Budget, get the job done","Middle of the road, fair price for good work","Premium, top quality and you pay for it"] },
+  ]},
+  { title: "You as a person", intro: "People hire people. This is how we make your content sound like you, not like an ad.", q: [
+    { id: "three_words", label: "Three words your mates would use to describe you", req: true },
+    { id: "outside_work", label: "What are you into outside of work?", hint: "Gym, footy, fishing, surfing, family, cars, dogs…", type: "textarea", req: true },
+    { id: "story", label: "What's the story behind starting your business?", hint: "Why you got into the trade, why you went out on your own.", type: "textarea" },
+    { id: "camera", label: "How comfortable are you being on camera?", type: "scale", ends: ["Hate it","Love it"], req: true },
+    { id: "talking", label: "How comfortable are you talking straight to camera?", type: "scale", ends: ["No chance","All good"], req: true },
+    { id: "come_across", label: "How do you want to come across?", type: "checks", opts: ["The expert","Down to earth and funny","Premium and professional","Family business","Hard worker","The local everyone knows"] },
+    { id: "language", label: "Language and humour", type: "radio", opts: ["Keep it clean","A bit of banter is fine","Swearing is fine, it's how I talk"] },
+    { id: "off_limits", label: "Anything off-limits?", hint: "Topics, family, prices on show, anything you don't want posted.", type: "textarea" },
+  ]},
+  { title: "Goals", intro: "What a win looks like for you.", q: [
+    { id: "goals", label: "What do you want out of this in the next 6–12 months?", type: "checks", opts: ["More jobs","Better-paying jobs","Fewer tyre-kickers","Stop relying on lead sites","Hire staff or apprentices","Build a personal brand","Look more professional online"] },
+    { id: "enquiries", label: "How many new enquiries a week would make you happy?" },
+    { id: "coming_up", label: "Anything coming up?", hint: "Busy season, new service, new ute or gear, a big job.", type: "textarea" },
+    { id: "liked_accounts", label: "Any accounts or businesses whose online look you like?", type: "textarea" },
+  ]},
+  { title: "Making the content", intro: "Liam comes out on site with a camera and drone.", q: [
+    { id: "where_working", label: "Where are you working most weeks?", hint: "So we can plan shoot days around your jobs.", type: "textarea" },
+    { id: "film_days", label: "Best days to film on site", type: "checks", opts: ["Mon","Tue","Wed","Thu","Fri","Sat"] },
+    { id: "phone_clips", label: "Happy to send quick phone clips or photos from jobs?", type: "radio", opts: ["Yes","Sometimes","Not really"] },
+    { id: "past_work", label: "Link to photos or videos of past work", hint: "Google Drive, Dropbox, anything. Before and afters are gold." },
+    { id: "sign_off", label: "Who signs off posts before they go out?", hint: "You, a partner, office manager…" },
+  ]},
+  { title: "Extras", intro: "Optional. Skip anything that doesn't apply.", q: [
+    { id: "website_status", label: "Your website situation", type: "radio", opts: ["Don't have one","Have one but it needs work","Have one and I'm happy with it","Not sure"] },
+    { id: "missed_calls", label: "Roughly how many calls do you miss a week while on the tools?", type: "radio", opts: ["0–2","3–5","6–10","10+","No idea"] },
+    { id: "interested", label: "Interested in hearing about any of these?", type: "checks", opts: ["A new or better website","AI that answers calls and books jobs","Automatic SMS follow-ups for quotes","Invoicing / admin help"] },
+    { id: "anything_else", label: "Anything else we should know?", type: "textarea" },
+    { id: "permission", label: "I'm happy for Integrity to use photos and videos of me, my team and my work in my marketing.", type: "consent", req: true },
+  ]},
+];
+
+let answers = {};
+try { answers = JSON.parse(localStorage.getItem(DRAFT_KEY) || "{}") || {}; } catch (e) { answers = {}; }
+let step = -1; // -1 intro, 0..n-1 steps, n review, n+1 done
+const N = STEPS.length;
+const $screen = document.getElementById("screen");
+const $nav = document.getElementById("nav");
+
+function el(tag, attrs, ...kids) {
+  const n = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs || {})) {
+    if (v == null || v === false) continue;
+    if (k === "class") n.className = v;
+    else if (k.startsWith("on")) n.addEventListener(k.slice(2), v);
+    else n.setAttribute(k, v === true ? "" : v);
+  }
+  for (const k of kids.flat()) if (k != null) n.append(k.nodeType ? k : document.createTextNode(k));
+  return n;
+}
+function put(parent, ...kids) { parent.append(...kids.filter(k => k != null)); }
+function save() { try { localStorage.setItem(DRAFT_KEY, JSON.stringify(answers)); } catch (e) {} }
+function visible(q) { return !q.showIf || answers[q.showIf[0]] === q.showIf[1]; }
+function filled(v) { return Array.isArray(v) ? v.length > 0 : v != null && String(v).trim() !== ""; }
+function display(q, v) { return Array.isArray(v) ? v.join(", ") : q.type === "consent" ? (v ? "Yes" : "") : String(v ?? ""); }
+
+function field(q) {
+  const wrap = el("div", { class: "q", id: "q-" + q.id });
+  const labelKids = [q.label, q.req ? el("span", { class: "req", "aria-hidden": "true" }, "*") : null];
+  const hint = q.hint ? el("div", { class: "hint", id: "h-" + q.id }, q.hint) : null;
+  const set = v => { answers[q.id] = v; save(); wrap.classList.remove("invalid"); wrap.querySelector(".err")?.remove(); };
+  const val = answers[q.id];
+
+  if (["radio", "checks", "scale"].includes(q.type)) {
+    const multi = q.type === "checks";
+    const opts = q.type === "scale" ? ["1","2","3","4","5"] : q.opts;
+    const group = el("div", { class: q.type === "scale" ? "chips scale" : "chips", role: multi ? "group" : "radiogroup", "aria-labelledby": "l-" + q.id });
+    opts.forEach((o, i) => {
+      const checked = multi ? (val || []).includes(o) : val === o;
+      const input = el("input", { type: multi ? "checkbox" : "radio", name: q.id, id: q.id + "-" + i, value: o, checked,
+        onchange: () => {
+          if (multi) set([...group.querySelectorAll("input:checked")].map(x => x.value));
+          else { set(o); rerenderConditionals(); }
+        } });
+      group.append(el("label", { class: "chip", for: q.id + "-" + i }, input, el("span", {}, o)));
+    });
+    put(wrap, el("div", { class: "qlabel", id: "l-" + q.id }, labelKids), hint, group);
+    if (q.type === "scale") put(wrap, el("div", { class: "scale-ends" }, el("span", {}, "1 · " + q.ends[0]), el("span", {}, q.ends[1] + " · 5")));
+    return wrap;
+  }
+  if (q.type === "consent") {
+    const box = el("input", { type: "checkbox", id: q.id, checked: !!val, onchange: e => set(e.target.checked) });
+    put(wrap, el("label", { class: "consent", for: q.id }, box, el("span", {}, labelKids)));
+    return wrap;
+  }
+  let input;
+  if (q.type === "select") {
+    input = el("select", { id: q.id, onchange: e => { set(e.target.value); rerenderConditionals(); } },
+      el("option", { value: "" }, "Choose one"), ...q.opts.map(o => el("option", { value: o, selected: val === o }, o)));
+  } else if (q.type === "textarea") {
+    input = el("textarea", { id: q.id, oninput: e => set(e.target.value) });
+    input.value = val || "";
+  } else {
+    input = el("input", { type: q.type || "text", id: q.id, autocomplete: q.auto || "off", inputmode: q.type === "tel" ? "tel" : null, oninput: e => set(e.target.value) });
+    input.value = val || "";
+  }
+  if (hint) input.setAttribute("aria-describedby", "h-" + q.id);
+  if (q.req) input.setAttribute("aria-required", "true");
+  put(wrap, el("label", { for: q.id }, labelKids), hint, input);
+  return wrap;
+}
+
+function rerenderConditionals() {
+  for (const q of (STEPS[step] || { q: [] }).q) if (q.showIf) {
+    const node = document.getElementById("q-" + q.id);
+    if (node) node.hidden = !visible(q);
+  }
+}
+
+function validate() {
+  let first = null;
+  for (const q of STEPS[step].q) {
+    if (!q.req || !visible(q) || filled(answers[q.id])) continue;
+    const node = document.getElementById("q-" + q.id);
+    node.classList.add("invalid");
+    if (!node.querySelector(".err")) node.append(el("div", { class: "err" }, q.type === "consent" ? "Tick this so we can use your photos and videos." : "This one's needed."));
+    first = first || node;
+  }
+  if (first) { first.scrollIntoView({ behavior: "smooth", block: "center" }); first.querySelector("input,select,textarea")?.focus({ preventScroll: true }); }
+  return !first;
+}
+
+function go(n) { step = n; render(); window.scrollTo(0, 0); }
+
+function render() {
+  $screen.replaceChildren(); $nav.replaceChildren();
+  const pct = step < 0 ? 0 : Math.min(100, Math.round((Math.min(step, N) / N) * 100));
+  document.getElementById("bar").style.width = pct + "%";
+  const count = document.getElementById("stepcount");
+
+  if (step === -1) {
+    count.textContent = "Get started";
+    const started = Object.keys(answers).length > 0;
+    put($screen, 
+      el("div", { class: "eyebrow" }, "Client intake"),
+      el("h1", {}, "Let's get to know you and your trade"),
+      el("p", { class: "lede" }, "We build your content around who you actually are, not a template. These answers are where that starts."),
+      el("ul", { class: "facts" }, el("li", {}, "7 short sections"), el("li", {}, "About 10–15 minutes"), el("li", {}, "Skip anything you're unsure of")),
+      started ? el("p", { class: "saved" }, "Your answers from last time are saved on this phone. Pick up where you left off.") : null,
+    );
+    $nav.append(el("button", { class: "primary", type: "button", onclick: () => go(0) }, started ? "Keep going" : "Start"));
+    return;
+  }
+  if (step < N) {
+    const s = STEPS[step];
+    count.textContent = `Step ${step + 1} of ${N}`;
+    put($screen, el("div", { class: "eyebrow" }, `Section ${step + 1}`), el("h2", {}, s.title), el("p", { class: "lede" }, s.intro));
+    for (const q of s.q) { const f = field(q); f.hidden = !visible(q); put($screen, f); }
+    $nav.append(
+      el("button", { class: "ghost", type: "button", onclick: () => go(step - 1) }, "Back"),
+      el("button", { class: "primary", type: "button", onclick: () => { if (validate()) go(step + 1); } }, step === N - 1 ? "Review" : "Next"),
+    );
+    return;
+  }
+  if (step === N) {
+    count.textContent = "Review";
+    put($screen, el("div", { class: "eyebrow" }, "Last check"), el("h2", {}, "Look right?"),
+      el("p", { class: "lede" }, "Tap Edit on any section to change it, then send it through."));
+    const list = el("div", { class: "review" });
+    STEPS.forEach((s, i) => {
+      const dl = el("dl", {});
+      for (const q of s.q) if (visible(q) && filled(answers[q.id])) dl.append(el("dt", {}, q.label), el("dd", {}, display(q, answers[q.id])));
+      if (!dl.children.length) dl.append(el("dd", { class: "saved" }, "Nothing filled in here."));
+      list.append(el("section", {}, el("h3", {}, s.title, el("button", { class: "ghost", type: "button", onclick: () => go(i) }, "Edit")), dl));
+    });
+    const status = el("div", { id: "status", role: "status" });
+    put($screen, list, status);
+    const send = el("button", { class: "primary", type: "button", onclick: () => submit(send, status) }, PREVIEW ? "Finish (preview)" : "Send to Integrity");
+    $nav.append(el("button", { class: "ghost", type: "button", onclick: () => go(N - 1) }, "Back"), send);
+    return;
+  }
+  count.textContent = "Done";
+  put($screen, el("div", { class: "eyebrow" }, "Sent"), el("h1", {}, "Legend, thanks!"),
+    el("p", { class: "lede" }, "Liam will go through your answers and be in touch to lock in a time to chat."),
+    PREVIEW ? el("p", { class: "notice" }, "Preview mode: nothing was sent.") : null);
+}
+
+function payload() {
+  const out = {
+    _subject: `New Integrity intake: ${answers.business || "?"} (${answers.name || "?"})`,
+    _template: "table",
+    _captcha: "false",
+  };
+  for (const s of STEPS) for (const q of s.q) if (visible(q)) out[q.label] = display(q, answers[q.id]) || "—";
+  // Machine-readable copy for the strategy skill.
+  out["answers_json"] = JSON.stringify({ submitted: new Date().toISOString(), ...answers });
+  return out;
+}
+
+async function submit(btn, status) {
+  btn.disabled = true; btn.textContent = "Sending…"; status.replaceChildren();
+  if (PREVIEW) { console.log(payload()); finish(); return; }
+  try {
+    const res = await fetch(SUBMIT_URL, { method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json" }, body: JSON.stringify(payload()) });
+    const body = await res.json().catch(() => ({}));
+    if (!res.ok || String(body.success) === "false") throw new Error(body.message || "Status " + res.status);
+    finish();
+  } catch (e) {
+    btn.disabled = false; btn.textContent = "Try again";
+    status.append(el("p", { class: "notice" }, "That didn't send. Check you've got signal and tap Try again. Your answers are saved on this phone, so nothing's lost."));
+  }
+}
+function finish() { try { localStorage.removeItem(DRAFT_KEY); } catch (e) {} answers = {}; go(N + 1); }
+
+render();
+</script>
+</body>
+</html>
