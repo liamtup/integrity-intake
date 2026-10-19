@@ -5,9 +5,10 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Integrity — Get Started</title>
 <meta name="description" content="Tell us about you and your trade business so we can build your content plan.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&display=swap">
 <style>
 /* Layout: one question group per screen, like a job sheet. A site-sign header band, a progress rule, big tap targets. */
 :root {
@@ -16,13 +17,13 @@
   --ink: #1d1f1e;
   --muted: #5d625f;
   --line: #d6d5cf;
-  --accent: #e8591a;      /* safety orange */
+  --accent: #f26419;      /* Integrity hi-vis orange */
   --accent-ink: #ffffff;
-  --accent-soft: #fbe3d6;
+  --accent-soft: #fde3d4;
   --band: #1d1f1e;
   --band-ink: #f3f2ef;
   --error: #b42318;
-  --display: "Barlow Condensed", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+  --display: "Big Shoulders Display", "Barlow Condensed", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
   --body: "Barlow", "Helvetica Neue", Arial, sans-serif;
   color-scheme: light;
 }
@@ -50,8 +51,8 @@ body {
 }
 header.band { background: var(--band); color: var(--band-ink); padding-top: env(safe-area-inset-top, 0px); }
 header.band .wrap { padding-block: 14px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-.brand { font: 700 22px/1 var(--display); letter-spacing: .14em; text-transform: uppercase; }
-.brand span { color: var(--accent); }
+.brand { display: flex; align-items: center; gap: 10px; font: 900 26px/1 var(--display); letter-spacing: .02em; text-transform: uppercase; }
+.brand svg { width: 30px; height: 30px; flex: none; }
 .stepcount { font: 600 14px/1 var(--display); letter-spacing: .08em; text-transform: uppercase; opacity: .8; font-variant-numeric: tabular-nums; }
 .progress { height: 6px; background: color-mix(in srgb, var(--band-ink) 18%, transparent); }
 .progress i { display: block; height: 100%; width: 0; background: var(--accent); transition: width .3s ease; }
@@ -119,7 +120,7 @@ button:focus-visible { outline: 3px solid var(--accent-soft); outline-offset: 2p
 </head>
 <body>
 <header class="band">
-  <div class="wrap"><div class="brand">Integ<span>r</span>ity</div><div class="stepcount" id="stepcount">Get started</div></div>
+  <div class="wrap"><div class="brand"><svg viewBox="0 0 120 120" aria-hidden="true"><path fill="#f26419" d="M114 60 L87 106.8 L33 106.8 L6 60 L33 13.2 L87 13.2 Z"/><path fill="#1d1f1e" d="M38 26 H82 V40 H70 V80 H82 V94 H38 V80 H50 V40 H38 Z"/></svg>Integrity</div><div class="stepcount" id="stepcount">Get started</div></div>
   <div class="progress" aria-hidden="true"><i id="bar"></i></div>
 </header>
 <main><div class="wrap" id="screen" aria-live="polite"></div></main>
